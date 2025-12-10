@@ -21,11 +21,12 @@ st.set_page_config(
 def load_data():
     # Fichier hébergé sur Google Drive
     file_id = "14xAlw2F-drxaG137tiFF4xDIGRnY6F1n"
-    url = f"https://drive.google.com/file/d/14xAlw2F-drxaG137tiFF4xDIGRnY6F1n/view?usp=sharing"
+    url = f"https://drive.google.com/file/d/14xAlw2F-drxaG137tiFF4xDIGRnY6F1n/view?usp=drive_link"
 
     # Lecture directe du CSV depuis Google Drive
     df = pd.read_csv(url)
     return df
+
 
 
 
