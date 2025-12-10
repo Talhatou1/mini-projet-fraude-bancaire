@@ -1,137 +1,175 @@
-# 💳 Analyse exploratoire des transactions bancaires (fraude)
+💳 Analyse Exploratoire d’un Jeu de Données Bancaires – Détection de Fraude
 
-Ce projet consiste à analyser un jeu de données réel contenant plus de **284 000 transactions bancaires**, dont seulement **0.17%** sont frauduleuses.  
-L’objectif principal est de comprendre la structure du dataset, d’étudier les variables importantes et d’identifier les patterns liés à la fraude.
+Projet – Outils de programmation pour la science des données
+Université du Québec à Chicoutimi (UQAC)
 
----
+📌 Description générale
 
-## 📁 Structure du projet
+Ce projet consiste à réaliser une analyse exploratoire complète (EDA) d’un jeu de données réel contenant 284 807 transactions bancaires, dont 492 fraudeuses.
+L’objectif est de :
 
-Mini-projet
-┣ 📂 app/ → Application Streamlit
-┃ ┗ 📄 app.py
-┣ 📂 data/ → Jeu de données
-┃ ┗ 📄 creditcard.csv
-┣ 📂 notebook/ → Notebook d’analyse
-┃ ┗ 📄 EDA_fraude.ipynb
-┣ 📄 README.md
-┗ 📄 requirements.txt
+comprendre la structure du dataset,
+
+analyser les variables (Time, Amount, V1–V28),
+
+mettre en évidence le déséquilibre des classes,
+
+visualiser les tendances importantes,
+
+créer une application Streamlit interactive capable d’afficher, filtrer et explorer les données.
+
+Aucun modèle de prédiction n’est demandé : il s’agit uniquement d’un travail exploratoire structuré.
+
+📁 Structure du projet
+mini-projet-fraude-bancaire/
+│
+├── app/
+│   └── app.py                  # Application Streamlit
+│
+├── data/
+│   └── creditcard.csv          # Téléchargé automatiquement via Google Drive au premier lancement
+│
+├── notebook/
+│   └── EDA_fraude.ipynb        # Analyse exploratoire complète (EDA)
+│
+├── requirements.txt            # Dépendances du projet
+└── README.md                   # Documentation du projet
+
+🔍 Contenu du fichier creditcard.csv
+
+Le dataset contient :
+
+Colonne	Description
+Time	Temps écoulé depuis la première transaction
+Amount	Montant de la transaction
+V1–V28	Variables dérivées d’une transformation PCA
+Class	0 = normale, 1 = fraude
+
+Le fichier original est trop volumineux pour être stocké directement sur GitHub.
+➡️ Il est donc téléchargé automatiquement via Google Drive lors du premier lancement de l'application Streamlit.
+
+🚀 Application Streamlit
+
+L'application permet de :
+
+afficher un résumé du dataset (nombre de transactions, de fraudes, pourcentage)
+
+explorer la répartition des classes
+
+analyser les variables Amount et Time
+
+générer des graphiques interactifs (Plotly)
+
+afficher une carte thermique de corrélations
+
+filtrer les transactions normales ou frauduleuses
+
+🌐 Téléchargement automatique du dataset (Google Drive)
+
+Le fichier complet creditcard.csv est hébergé sur Google Drive.
+L'application utilise gdown pour :
+
+vérifier si le fichier existe localement,
+
+sinon le télécharger automatiquement,
+
+puis le charger avec pandas.
+
+file_id = "14xAlw2F-drxaG137tiFF4xDIGRnY6F1n"
+gdown.download(id=file_id, output="data/creditcard.csv", quiet=False)
 
 
----
+Cela permet d'exécuter l’application même sans inclure le fichier CSV dans le dépôt GitHub.
 
-## 🎯 Objectifs du projet
+🧪 Analyse exploratoire (EDA) – Notebook
 
-- Explorer et comprendre le dataset  
-- Analyser la répartition des transactions frauduleuses  
-- Étudier les variables : **Amount**, **Time**, **V1–V28 (PCA)**  
-- Identifier les variables les plus corrélées avec la fraude  
-- Créer des visualisations (Matplotlib, Seaborn, Plotly)  
-- Développer une **application Streamlit interactive**  
-- Produire un **rapport PDF** résumant les résultats  
+Le notebook EDA_fraude.ipynb contient :
 
----
+1️⃣ Chargement et exploration du dataset
 
-## 📊 Contenu du notebook (`EDA_fraude.ipynb`)
+dimensions
 
-### ✔ 1. Aperçu général
-- Chargement des données  
-- Types des variables  
-- Valeurs manquantes  
-- Statistiques descriptives  
+types
 
-### ✔ 2. Analyse de la variable *Class*
-- Comptage des transactions normales vs frauduleuses  
-- Visualisation du déséquilibre (countplot)  
+valeurs manquantes
 
-### ✔ 3. Analyse du montant (`Amount`)
-- Histogrammes  
-- Boxplots  
-- Comparaison entre classes  
+statistiques descriptives
 
-### ✔ 4. Analyse temporelle (`Time`)
-- Distribution du temps  
-- Time vs Amount  
-- Comparaison selon la classe  
+2️⃣ Analyse des distributions
 
-### ✔ 5. Corrélations
-- Matrice de corrélation  
-- Heatmap (Seaborn + Plotly)  
-- Variables les plus corrélées avec la fraude  
+Histogrammes et boxplots de Amount
 
-### ✔ 6. Visualisations avancées
-- Boxplots pour les variables importantes  
-- Scatterplots (V10, V12, V14, V17…)  
-- Densités KDE  
+Analyse temporelle avec Time
 
----
+3️⃣ Analyse de la variable cible
 
-## 🌐 Application Streamlit
+Comptage des classes
 
-Une application interactive a été développée dans le dossier `app/`.
+Visualisation du déséquilibre
 
-### ▶️ Lancer l'application :
+4️⃣ Corrélations et relations
 
-```bash
-cd app
-streamlit run app.py
+Matrice de corrélation
 
-Fonctionnalités :
+Heatmap
 
-    Visualisation interactive du dataset
+Variables les plus liées à la fraude (ex : V10, V12, V14…)
 
-    Analyse du montant et du temps
+5️⃣ Visualisations supplémentaires
 
-    Corrélations (Plotly)
+Scatterplots
 
-    Filtrage par classe (fraude / normal)
+Distributions selon la classe
 
-⚙️ Installation du projet
-1️⃣ Créer un environnement virtuel
+6️⃣ Synthèse des observations
 
+Résumé clair des patterns observés.
+
+⚙️ Installation et exécution
+📥 1. Cloner le projet
+git clone https://github.com/ton-repo/mini-projet-fraude-bancaire.git
+cd mini-projet-fraude-bancaire
+
+🧩 2. Créer et activer un environnement virtuel
 python -m venv .venv
+source .venv/bin/activate      # Mac/Linux
+.\.venv\Scripts\activate       # Windows
 
-2️⃣ Activer l’environnement
-
-Windows :
-
-.venv\Scripts\activate
-
-Mac / Linux :
-
-source .venv/bin/activate
-
-3️⃣ Installer les dépendances
-
+📦 3. Installer les dépendances
 pip install -r requirements.txt
 
-4️⃣ Ouvrir le notebook
-
-jupyter notebook
-
-📚 Description du dataset
-
-    V1 à V28 : composantes PCA
-
-    Amount : montant de la transaction
-
-    Time : temps écoulé depuis la première transaction
-
-    Class :
-
-        0 → transaction normale
-
-        1 → transaction frauduleuse
-
-🔮 Améliorations possibles
-
-    Rééquilibrage des données (SMOTE)
-
-    Modèles de classification (XGBoost, Random Forest, SVM…)
-
-    Sélection automatique des variables
-
-    Dashboard Streamlit plus complet
+▶️ 4. Lancer l'application Streamlit
+streamlit run app/app.py
 
 
+Au premier lancement, creditcard.csv sera téléchargé automatiquement depuis Google Drive.
 
+📊 Technologies utilisées
+
+Python 3.x
+
+Pandas – manipulation de données
+
+NumPy – calculs numériques
+
+Matplotlib / Seaborn – visualisations classiques
+
+Plotly – visualisations interactives
+
+Streamlit – application web
+
+gdown – téléchargement Google Drive
+
+👩‍💻 Auteur
+
+Talhatou Baldé
+Baccalauréat en informatique
+Université du Québec à Chicoutimi (UQAC)
+
+📌 Remarque importante
+
+Ce projet a été réalisé dans un cadre académique et ne doit pas être utilisé pour des systèmes réels de détection de fraude.
+
+🎉 Merci d’avoir consulté ce projet !
+
+N’hésitez pas à ouvrir une issue ou un pull request sur GitHub si vous souhaitez proposer des améliorations.
