@@ -19,10 +19,14 @@ st.set_page_config(
 # =========================
 @st.cache_data
 def load_data():
-    # On lance : streamlit run app/app.py depuis le dossier "Mini projet"
-    # Le fichier CSV est dans "data/creditcard.csv"
-    df = pd.read_csv("data/creditcard.csv")
+    # Fichier hébergé sur Google Drive
+    file_id = "14xAlw2F-drxaG137tiFF4xDIGRnY6F1n"
+    url = f"https://drive.google.com/file/d/14xAlw2F-drxaG137tiFF4xDIGRnY6F1n/view?usp=sharing"
+
+    # Lecture directe du CSV depuis Google Drive
+    df = pd.read_csv(url)
     return df
+
 
 
 df = load_data()
