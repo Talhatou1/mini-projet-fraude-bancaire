@@ -4,6 +4,9 @@ import numpy as np
 import plotly.express as px
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os
+import gdown
+
 
 # =========================
 # Configuration générale de la page
@@ -19,12 +22,21 @@ st.set_page_config(
 # =========================
 @st.cache_data
 def load_data():
-    # Fichier hébergé sur Google Drive
-    file_id = "14xAlw2F-drxaG137tiFF4xDIGRnY6F1n"
-    url = f"https://drive.google.com/file/d/14xAlw2F-drxaG137tiFF4xDIGRnY6F1n/view?usp=drive_link"
+    # Chemin local où sera stocké le fichier téléchargé
+    local_path = "data/creditcard.csv"
+    os.makedirs("data", exist_ok=True)
 
-    # Lecture directe du CSV depuis Google Drive
-    df = pd.read_csv(url)
+    # Si le fichier n'existe pas encore sur le serveur, on le télécharge depuis Google Drive
+    if not os.path.exists(local_path):
+        file_id = "14xAlw2F-drxaG137tiFF4xDIGRnY6F1n"
+          # ton ID Google Drive
+        url = f"https://drive.google.com/file/d/14xAlw2F-drxaG137tiFF4xDIGRnY6F1n/view?usp=drive_link"
+
+        # Téléchargement avec gdown
+        gdown.download(url, local_path, quiet=False)
+
+    # Lecture du CSV complet en local
+    df = pd.read_csv(local_path)
     return df
 
 
