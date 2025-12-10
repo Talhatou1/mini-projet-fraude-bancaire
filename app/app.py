@@ -7,7 +7,6 @@ import seaborn as sns
 import os
 import gdown
 
-
 # =========================
 # Configuration générale de la page
 # =========================
@@ -26,20 +25,18 @@ def load_data():
     local_path = "data/creditcard.csv"
     os.makedirs("data", exist_ok=True)
 
-    # Si le fichier n'existe pas encore sur le serveur, on le télécharge depuis Google Drive
-    if not os.path.exists(local_path):
-        file_id = "14xAlw2F-drxaG137tiFF4xDIGRnY6F1n"
-          # ton ID Google Drive
-        url = f"https://drive.google.com/file/d/14xAlw2F-drxaG137tiFF4xDIGRnY6F1n/view?usp=drive_link"
+    # ID Google Drive du fichier creditcard.csv
+    file_id = "14xAlw2F-drxaG137tiFF4xDIGRnY6F1n"
 
-        # Téléchargement avec gdown
-        gdown.download(url, local_path, quiet=False)
+    # Si le fichier n'existe pas encore OU semble corrompu/petit,
+    # on (re)télécharge depuis Google Drive
+    if (not os.path.exists(local_path)) or os.path.getsize(local_path) < 1_000_000:
+        # Téléchargement direct via l'ID du fichier
+        gdown.download(id=file_id, output=local_path, quiet=False)
 
     # Lecture du CSV complet en local
     df = pd.read_csv(local_path)
     return df
-
-
 
 
 df = load_data()
